@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>umd版本演示</title>
+    <link rel="stylesheet" href="./style.css" />
+    <!-- 导入d3 -->
+    <script src="https://cdn.bootcdn.net/ajax/libs/d3/7.9.0/d3.min.js"></script>
+    <!-- 导入Sitc -->
+    <script src="../dist/sitclib.umd.js"></script>
+  </head>
+  <body>
+    <!-- 指定画布，SITC算法默认选择id为sitc-svg的svg元素作为画布 -->
+    <svg id="sitc-svg"></svg>
+    <!-- <reference types="../dist/types/index.d.ts" />; -->
+    <script>
+      // 实例化sitc对象
+      const sitc = new Sitc();
+      console.log({ sitc });
+
+      // 使用D3读取空间交互数据
+      d3.json("../testData/flightsData.json").then((sourceData) => {
+        sitc
+          .data(sourceData.filter((_, i) => i < 5)) // 指定空间交互数据
+          .setMode("M")
+          .setDirection("inValue")
+          .setColorScheme(["black", "#BE5985", "#80CBC4", "#B7B1F2"])
+          .setFont({
+            fontWeight: "bold",
+            fontSizeScale: "local",
+            fontFamily: "华文彩云",
+          })
+          .setArrow({
+            stroke: {
+              color: "#F72C5B",
+            },
+          })
+          .setShow({ circle: true })
+          .layout();
+      });
+    </script>
+  </body>
+</html>

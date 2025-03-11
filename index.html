@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="zh">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>SITC</title>
+    <style>
+      * {
+        padding: 0;
+        margin: 0;
+      }
+      body {
+        height: 100vh;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+      }
+      #sitc-svg {
+        width: 1000px;
+        height: 1000px;
+        border: 1px solid gray;
+      }
+    </style>
+  </head>
+  <body>
+    <!-- 指定画布，SITC算法默认选择id为sitc-svg的svg元素作为画布 -->
+    <svg id="sitc-svg"></svg>
+  </body>
+  <script type="module">
+    import * as d3 from "d3";
+    import Sitc from "./dist/sitclib.es.js";
+
+    //实例化得到sitc对象
+    const sitc = new Sitc();
+    console.log({ sitc });
+
+    // 使用D3读取空间交互数据
+    d3.json("./testData/flightsData.json").then((sourceData) => {
+      sitc.data([sourceData[0]]).layout();
+    });
+
+    // sitc1
+    // .layout()
+    // .data([])
+    // .data([1])
+    // .svg(".svg")
+    // .spiral({ a: 1111, c: 222 })
+    // .setMode("aa")
+    // .setMode("D2")
+    // .setShow({ circle: true })
+    // .setDirection("8d8da")
+    // .setDirection("inValue")
+    // .setInteraction(false);
+  </script>
+</html>

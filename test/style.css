@@ -1,0 +1,15 @@
+* {
+  padding: 0;
+  margin: 0;
+}
+body {
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+#sitc-svg {
+  width: 1000px;
+  height: 1000px;
+  border: 1px solid gray;
+}
