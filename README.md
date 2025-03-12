@@ -1,5 +1,32 @@
 ## 空间交互标签云布局库（SitcLib）
 
+### 目录
+
+- [简介](#简介)
+- [基本使用](#基本使用)
+  - [使用 script 标签导入](#使用script标签导入)
+  - [使用 esm 标签导入](#使用esm标签导入)
+- [前置概念](#前置概念)
+  - [默认配置](#默认配置)
+  - [空间交互数据](#空间交互数据)
+  - [空间交互标签云模式](#空间交互标签云模式)
+    - [1.单中心模式](#1.单中心模式)
+    - [2.双中心模式](#2.双中心模式)
+    - [3.多中心模式](#3.多中心模式)
+- [API](#API)
+  - [**_sitc_**.data()](<#sitc.data()>)
+  - [**_sitc_**.setMode()](<#sitc.setMode()>)
+  - [**_sitc_**.setDirection()](<#sitc.setDirection()>)
+  - [**_sitc_**.setArrow()](<#sitc.setArrow()>)
+  - [**_sitc_**.setColorScheme()](<#sitc.setColorScheme()>)
+  - [**_sitc_**.setFont()](<#sitc.setFont()>)
+  - [**_sitc_**.setShow()](<#sitc.setShow()>)
+  - [**_sitc_**.spiral()](<#sitc.spiral()>)
+  - [**_sitc_**.svg()](<#sitc.svg()>)
+  - [**_sitc_**.setInteraction()](<#sitc.setInteraction()>)
+  - [**_sitc_**.layout()](<#sitc.layout()>)
+- [测试用例中的 SITC](#测试用例中的 SITC)
+
 ### 简介
 
 **SitcLib** 是用于绘制空间交互标签云（Spatial Interaction Tag Cloud, SITC）的 JavaScript 库，它依赖于[D3.js](https://d3js.org/)，使用 SVG 绘制 SITC。
@@ -475,10 +502,10 @@ sitc
 	.loyout(); // 根据指定的数据、模式、色带并结合其他未修改的默认配置绘制空间交互标签云
 ```
 
-### 测试用例
+### 测试用例中的 SITC
 
 ```she
 npm run dev
 ```
 
-![测试用例结果](C:\Users\HP\AppData\Roaming\Typora\typora-user-images\image-20250310203206675.png)
+![测试用例结果](./img/umd_img.jpg)
