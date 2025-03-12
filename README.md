@@ -14,7 +14,7 @@
     - [2.双中心模式](#2.双中心模式)
     - [3.多中心模式](#3.多中心模式)
 - [API](#API)
-  - [**_sitc_**.data()](#sitcdata())
+  - [**_sitc_**.data()](#sitcdata)
   - [**_sitc_**.setMode()](<#sitc.setMode()>)
   - [**_sitc_**.setDirection()](<#sitc.setDirection()>)
   - [**_sitc_**.setArrow()](<#sitc.setArrow()>)
@@ -298,7 +298,7 @@ SitcLib 默认导出**Sitc**类，实例化该类得到一个具有绘制 SITC �
 
 ### API
 
-#### _sitc_.data()
+#### _sitc_.data() {#sitcdata}
 
 **用途：** 指定空间交互数据。**_注意：_**指定的空间交互数据中的中心地点数量需要和模式对应，S1、S2、D2 模式支持一个中心地点，D1 模式支持两个中心地点，M 模式支持任意数量的中心地点。
 
