@@ -4,7 +4,7 @@
 
 - [简介](#简介)
 - [基本使用](#基本使用)
-  - [使用script标签导入](#使用 script 标签导入)
+  - [使用script标签导入](#使用script标签导入)
   - [使用esm标签导入](#使用esm标签导入)
 - [前置概念](#前置概念)
   - [默认配置](#默认配置)
@@ -25,7 +25,7 @@
   - [**_sitc_**.svg()](<#sitc.svg()>)
   - [**_sitc_**.setInteraction()](<#sitc.setInteraction()>)
   - [**_sitc_**.layout()](<#sitc.layout()>)
-- [测试用例中的SITC](#测试用例中的 SITC)
+- [测试用例中的SITC](#测试用例中的SITC)
 
 ### 简介
 
@@ -328,11 +328,11 @@ sitc.setMode("M"); // 指定为多中心模式
 
 #### _sitc_.setDirection()
 
-**用途：**指定空间交互的方向,必须为"totalValue", "inValue", "outValue"中的一种。
+**用途：** 指定空间交互的方向,必须为"totalValue", "inValue", "outValue"中的一种。
 
-**默认值：**"totalValue"
+**默认值：** "totalValue"
 
-**返回值：**sitc 对象
+**返回值：** sitc 对象
 
 ```js
 const sitc = new Sitc(); // 实例化
