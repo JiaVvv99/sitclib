@@ -41,7 +41,7 @@
 
 **SitcLib**内部依赖于 D3.js,使用时需要导入 D3.js。
 
-<a id="script" />
+<a id="script"></a>
 
 #### 使用 script 标签导入
 
@@ -78,7 +78,7 @@
 </html>
 ```
 
-<a id="esm" />
+<a id="esm"></a>
 
 #### 使用 esm 导入
 
