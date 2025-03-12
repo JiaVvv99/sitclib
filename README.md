@@ -4,27 +4,27 @@
 
 - [简介](#简介)
 - [基本使用](#基本使用)
-  - [使用script标签导入](#使用script标签导入)
-  - [使用esm标签导入](#使用esm标签导入)
+  - [使用script标签导入](#script)
+  - [使用esm标签导入](#esm)
 - [前置概念](#前置概念)
   - [默认配置](#默认配置)
   - [空间交互数据](#空间交互数据)
   - [空间交互标签云模式](#空间交互标签云模式)
-    - [1.单中心模式](#1.单中心模式)
-    - [2.双中心模式](#2.双中心模式)
-    - [3.多中心模式](#3.多中心模式)
+    - [1.单中心模式](#s)
+    - [2.双中心模式](#d)
+    - [3.多中心模式](#m)
 - [API](#API)
-  - [**_sitc_**.data()](#sitcdata)
-  - [**_sitc_**.setMode()](<#sitc.setMode()>)
-  - [**_sitc_**.setDirection()](<#sitc.setDirection()>)
-  - [**_sitc_**.setArrow()](<#sitc.setArrow()>)
-  - [**_sitc_**.setColorScheme()](<#sitc.setColorScheme()>)
-  - [**_sitc_**.setFont()](<#sitc.setFont()>)
-  - [**_sitc_**.setShow()](<#sitc.setShow()>)
-  - [**_sitc_**.spiral()](<#sitc.spiral()>)
-  - [**_sitc_**.svg()](<#sitc.svg()>)
-  - [**_sitc_**.setInteraction()](<#sitc.setInteraction()>)
-  - [**_sitc_**.layout()](<#sitc.layout()>)
+  - [**_sitc_**.data()](#data)
+  - [**_sitc_**.setMode()](#setMode)
+  - [**_sitc_**.setDirection()](#setDirection)
+  - [**_sitc_**.setArrow()](<#setArrow)
+  - [**_sitc_**.setColorScheme()](#setColorScheme)
+  - [**_sitc_**.setFont()](#setFont)
+  - [**_sitc_**.setShow()](#setShow)
+  - [**_sitc_**.spiral()](#spiral)
+  - [**_sitc_**.svg()](#svg)
+  - [**_sitc_**.setInteraction()](#setInteraction)
+  - [**_sitc_**.layout()](#layout)
 - [测试用例中的SITC](#finsh)
 
 ### 简介
@@ -34,6 +34,8 @@
 ### 基本使用
 
 **SitcLib**内部依赖于 D3.js,使用时需要导入 D3.js。
+
+<a id="script" />
 
 #### 使用 script 标签导入
 
@@ -67,6 +69,8 @@
   </body>
 </html>
 ```
+
+<a id="esm" />
 
 #### 使用 esm 导入
 
@@ -278,12 +282,16 @@ SitcLib 默认导出**Sitc**类，实例化该类得到一个具有绘制 SITC �
 
 空间交互标签云设计有**单中心** 、**双中心** 与**多中心** 三种模式，每种模式支持输出的空间交互数据的中心地点数量与应用场景不同。
 
+<a id="s" />
+
 **1.单中心模式**
 
 单中心模式支出输入一个中心地点的空间交互数据，细分为**单中心同尺度(S1)** 与**单中心不同尺度(S2)** 两种模式。
 
 **单中心同尺度(S1)** 用于展示一个中心地点与同一尺度的其他地点的空间交互情况；
 **单中心不同尺度(S2)** 用于展示一个中心地点与不同尺度的其他地点的空间交互情况，**_注意，需要指定空间交互数据中 targets 里地点的 class 属性_** 。
+
+<a id="d" />
 
 **2.双中心模式**
 
@@ -292,11 +300,15 @@ SitcLib 默认导出**Sitc**类，实例化该类得到一个具有绘制 SITC �
 **双中心同流向(D1)** 需要输入两个中心地点交互数据，对比这两个地点流入（inValue）、流出(outValue)或总和(totalValue)的交互情况；
 **双中心不同流向(D2)** 需要输入一个中心地点的交互数据，对比这一个地点作为交互流入地与流出地的交互情况。
 
+<a id="m" />
+
 **3.多中心模式**
 
 **多中心模式(M)** 支持输入任意数量中心地点的空间交互数据，展示这些地点空间交互情况。
 
 ### API
+
+<a id="data"><a>
 
 #### _sitc_.data()
 
@@ -313,6 +325,8 @@ const sidata2 = [...];
 sitc.data(sidata2); // 重新指定空间交互数据
 ```
 
+<a id="setMode"><a>
+
 #### _sitc_.setMode()
 
 **用途：** 指定空间交互模式,必须为"S1", "S2", "D1", "D2", "M"中的一种。
@@ -326,6 +340,8 @@ const sitc = new Sitc(); // 实例化
 sitc.setMode("M"); // 指定为多中心模式
 ```
 
+<a id="setDirection"><a>
+
 #### _sitc_.setDirection()
 
 **用途：** 指定空间交互的方向,必须为"totalValue", "inValue", "outValue"中的一种。
@@ -338,6 +354,8 @@ sitc.setMode("M"); // 指定为多中心模式
 const sitc = new Sitc(); // 实例化
 sitc.setMode("inValue"); // 指定为交互方向为"inValue"
 ```
+
+<a id="setArrow"><a>
 
 #### _sitc_.setArrow()
 
@@ -367,6 +385,8 @@ sitc.setArrow({
 }); // 修改箭头颜色为蓝色
 ```
 
+<a id="setColorScheme"><a>
+
 #### _sitc_.setColorScheme()
 
 **用途：** 指定空间交互标签云中标签的配色。
@@ -383,6 +403,8 @@ sitc.setArrow({
 const sitc = new Sitc(); // 实例化
 sitc.setColorScheme(["purple", "rgb(255,255,255)", "#333", "#e6e6e6"]); // 修改箭头颜色为蓝色
 ```
+
+<a id="setFont"><a>
 
 #### _sitc_.setFont()
 
@@ -410,6 +432,8 @@ sitc.setFont({
 }); // 指定字体为楷体并加粗
 ```
 
+<a id="setShow"><a>
+
 #### _sitc_.setShow()
 
 **用途：** 指定标签簇外接圆与文本标签矩形包围盒是否可见。
@@ -432,6 +456,8 @@ sitc.setShow({
   rect: true, // 可见
 });
 ```
+
+<a id="spiral"><a>
 
 #### _sitc_.spiral()
 
@@ -457,6 +483,8 @@ sitc.spiral({
 }); // 修改阿基米德螺线的螺距
 ```
 
+<a id="svg"><a>
+
 #### _sitc_.svg()
 
 **用途：** 指定 svg 画布的 css 选择器。
@@ -473,6 +501,8 @@ sitc.spiral({
 </script>
 ```
 
+<a id="setInteraction"><a>
+
 #### _sitc_.setInteraction()
 
 **用途：** 指定 SITC 是否开启交互，默认开启的交互有画布的平移缩放、鼠标悬浮高亮同名标签、拖拽中心标签移动整个地名标签簇。
@@ -485,6 +515,8 @@ sitc.spiral({
 const sitc = new Sitc(); // 实例化
 sitc.setInteraction(false); // 关闭交互
 ```
+
+<a id="lauout"><a>
 
 #### _sitc_.layout()
 
