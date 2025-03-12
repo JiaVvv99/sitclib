@@ -2,6 +2,8 @@
 
 ### 目录
 
+<a id="top" />
+
 - [简介](#简介)
 - [基本使用](#基本使用)
   - [使用script标签导入](#script)
@@ -29,15 +31,21 @@
 
 ### 简介
 
+[返回](#top)
+
 **SitcLib** 是用于绘制空间交互标签云（Spatial Interaction Tag Cloud, SITC）的 JavaScript 库，它依赖于[D3.js](https://d3js.org/)，使用 SVG 绘制 SITC。
 
 ### 基本使用
+
+[返回](#top)
 
 **SitcLib**内部依赖于 D3.js,使用时需要导入 D3.js。
 
 <a id="script" />
 
 #### 使用 script 标签导入
+
+[返回](#top)
 
 ```html
 <!DOCTYPE html>
@@ -73,6 +81,8 @@
 <a id="esm" />
 
 #### 使用 esm 导入
+
+[返回](#top)
 
 可以通过 npm 下载 es 版本的**SitcLib**，也可以将 dist 文件下的**sitclib.es.js**直接下载到本地。
 
@@ -114,6 +124,8 @@ npm install sitclib
 ### 前置概念
 
 #### 默认配置
+
+[返回](#top)
 
 SitcLib 默认导出**Sitc**类，实例化该类得到一个具有绘制 SITC 默认配置的 **_sitc_** 对象，具体配置如下：
 
@@ -162,6 +174,8 @@ SitcLib 默认导出**Sitc**类，实例化该类得到一个具有绘制 SITC �
 ```
 
 #### 空间交互数据
+
+[返回](#top)
 
 **SITC**布局所需的数据，具体格式如下：
 
@@ -280,6 +294,8 @@ SitcLib 默认导出**Sitc**类，实例化该类得到一个具有绘制 SITC �
 
 #### 空间交互标签云模式
 
+[返回](#top)
+
 空间交互标签云设计有**单中心** 、**双中心** 与**多中心** 三种模式，每种模式支持输出的空间交互数据的中心地点数量与应用场景不同。
 
 <a id="s" />
@@ -312,6 +328,8 @@ SitcLib 默认导出**Sitc**类，实例化该类得到一个具有绘制 SITC �
 
 #### _sitc_.data()
 
+[返回](#top)
+
 **用途：** 指定空间交互数据。**_注意：_**指定的空间交互数据中的中心地点数量需要和模式对应，S1、S2、D2 模式支持一个中心地点，D1 模式支持两个中心地点，M 模式支持任意数量的中心地点。
 
 **默认值：** null
@@ -329,6 +347,8 @@ sitc.data(sidata2); // 重新指定空间交互数据
 
 #### _sitc_.setMode()
 
+[返回](#top)
+
 **用途：** 指定空间交互模式,必须为"S1", "S2", "D1", "D2", "M"中的一种。
 
 **默认值：**"S1"
@@ -344,6 +364,8 @@ sitc.setMode("M"); // 指定为多中心模式
 
 #### _sitc_.setDirection()
 
+[返回](#top)
+
 **用途：** 指定空间交互的方向,必须为"totalValue", "inValue", "outValue"中的一种。
 
 **默认值：** "totalValue"
@@ -358,6 +380,8 @@ sitc.setMode("inValue"); // 指定为交互方向为"inValue"
 <a id="setArrow"><a>
 
 #### _sitc_.setArrow()
+
+[返回](#top)
 
 **用途：** 指定空间交互标签云中指向箭头的相关配置。
 
@@ -389,6 +413,8 @@ sitc.setArrow({
 
 #### _sitc_.setColorScheme()
 
+[返回](#top)
+
 **用途：** 指定空间交互标签云中标签的配色。
 
 **默认值：**
@@ -407,6 +433,8 @@ sitc.setColorScheme(["purple", "rgb(255,255,255)", "#333", "#e6e6e6"]); // 修�
 <a id="setFont"><a>
 
 #### _sitc_.setFont()
+
+[返回](#top)
 
 **用途：** 指定空间交互标签云中标签文本相关配置。
 
@@ -436,6 +464,8 @@ sitc.setFont({
 
 #### _sitc_.setShow()
 
+[返回](#top)
+
 **用途：** 指定标签簇外接圆与文本标签矩形包围盒是否可见。
 
 **默认值：**
@@ -460,6 +490,8 @@ sitc.setShow({
 <a id="spiral"><a>
 
 #### _sitc_.spiral()
+
+[返回](#top)
 
 **用途：** 指定阿基米德螺线相关配置。
 
@@ -487,6 +519,8 @@ sitc.spiral({
 
 #### _sitc_.svg()
 
+[返回](#top)
+
 **用途：** 指定 svg 画布的 css 选择器。
 
 **默认值：** "#sitc-svg"
@@ -505,6 +539,8 @@ sitc.spiral({
 
 #### _sitc_.setInteraction()
 
+[返回](#top)
+
 **用途：** 指定 SITC 是否开启交互，默认开启的交互有画布的平移缩放、鼠标悬浮高亮同名标签、拖拽中心标签移动整个地名标签簇。
 
 **默认值：** true
@@ -519,6 +555,8 @@ sitc.setInteraction(false); // 关闭交互
 <a id="layout"><a>
 
 #### _sitc_.layout()
+
+[返回](#top)
 
 **用途：** 根据设定配置绘制空间交互标签云。
 
@@ -537,6 +575,8 @@ sitc
 <a id="finsh"><a>
 
 ### 测试用例中的 SITC
+
+[返回](#top)
 
 ```she
 npm run dev
