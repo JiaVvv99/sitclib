@@ -17,7 +17,7 @@
   - [**_sitc_**.data()](#data)
   - [**_sitc_**.setMode()](#setMode)
   - [**_sitc_**.setDirection()](#setDirection)
-  - [**_sitc_**.setArrow()](<#setArrow)
+  - [**_sitc_**.setArrow()](#setArrow)
   - [**_sitc_**.setColorScheme()](#setColorScheme)
   - [**_sitc_**.setFont()](#setFont)
   - [**_sitc_**.setShow()](#setShow)
@@ -516,7 +516,7 @@ const sitc = new Sitc(); // 实例化
 sitc.setInteraction(false); // 关闭交互
 ```
 
-<a id="lauout"><a>
+<a id="layout"><a>
 
 #### _sitc_.layout()
 
