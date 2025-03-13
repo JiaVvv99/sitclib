@@ -45,9 +45,9 @@ export function sortedSingle2(data, direction) {
   // const city = targets.filter((d) => d.class === "city");
   // const province = targets.filter((d) => d.class === "province");
   // const country = targets.filter((d) => d.class === "country");
-  const city = targets.filter((d) => d.class === "1");
-  const province = targets.filter((d) => d.class === "2");
-  const country = targets.filter((d) => d.class === "3");
+  const city = targets.filter((d) => d.class === 1);
+  const province = targets.filter((d) => d.class === 2);
+  const country = targets.filter((d) => d.class === 3);
   // 添加属性
   city.forEach((d) => {
     d.tagClass = "allShared";
