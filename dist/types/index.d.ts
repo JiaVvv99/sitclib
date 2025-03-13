@@ -1,5 +1,3 @@
-// dist/types/index.d.ts
-
 // 核心类型声明
 declare namespace SitcLib {
   /** 空间交互数据格式 */
@@ -51,10 +49,10 @@ declare namespace SitcLib {
   /** 字体配置 */
   interface FontConfig {
     fontSizeRange?: [number, number];
-    fontSizeScale?: 'global' | 'local';
+    fontSizeScale?: "global" | "local";
     fontFamily?: string;
-    fontWeight?: 'normal' | 'bold';
-    fontStyle?: 'normal' | 'italic';
+    fontWeight?: "normal" | "bold";
+    fontStyle?: "normal" | "italic";
   }
 
   /** 可见性配置 */
@@ -72,10 +70,10 @@ declare namespace SitcLib {
   }
 
   /** 模式类型 */
-  type ModeType = 'S1' | 'S2' | 'D1' | 'D2' | 'M';
+  type ModeType = "S1" | "S2" | "D1" | "D2" | "M";
 
   /** 方向类型 */
-  type DirectionType = 'totalValue' | 'inValue' | 'outValue';
+  type DirectionType = "totalValue" | "inValue" | "outValue";
 }
 
 /** 主类声明 */
@@ -96,7 +94,4 @@ declare class Sitc {
 }
 
 // 导出类型（供 TS 用户使用）
-export {
-  Sitc as default,
-  SitcLib
-};
+export { Sitc as default, SitcLib };

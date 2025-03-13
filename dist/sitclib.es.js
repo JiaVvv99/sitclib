@@ -77,9 +77,9 @@ function sortedSingle2(data, direction) {
   source.groupClass = data[0].source.name;
   source.nameClass = data[0].source.name;
   const targets = data[0].targets;
-  const city = targets.filter((d) => d.class === "1");
-  const province = targets.filter((d) => d.class === "2");
-  const country = targets.filter((d) => d.class === "3");
+  const city = targets.filter((d) => d.class === 1);
+  const province = targets.filter((d) => d.class === 2);
+  const country = targets.filter((d) => d.class === 3);
   city.forEach((d) => {
     d.tagClass = "allShared";
     d.groupClass = source.name;
