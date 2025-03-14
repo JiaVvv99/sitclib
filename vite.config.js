@@ -9,7 +9,8 @@ export default defineConfig({
   server: {
     // open: "/test/es.html", // sitclib.es.js
     // open: "/test/umd.html", // sitclib.umd.js
-    open: "/test/selectFile.html",
+    // open: "/test/selectFile.html",
+    open: "/test/indexedDBDemo.html",
   },
 
   // 构建配置

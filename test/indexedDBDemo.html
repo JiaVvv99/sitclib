@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>测试indexedDB</title>
+    <link rel="stylesheet" href="./style.css" />
+  </head>
+  <body>
+    <div id="svg-wrapper">
+      <svg id="sitc-svg"></svg>
+      <div id="list-wrapper">
+        <ul id="list"></ul>
+        <button id="refresh">刷新城市列表</button>
+      </div>
+    </div>
+    <div>
+      <input type="file" accept=".json" id="jsonInp" />
+      <button id="btn">上传文件</button>
+      <button id="del">删除已传</button>
+      <button id="draw">生成SITC</button>
+    </div>
+    <script type="module">
+      // import * as d3 from "d3";
+      // import Sitc from "../sitc_algorithm";
+      import Sitc from "sitclib";
+      import Dexie from "dexie";
+
+      // 实例化
+      const sitc = new Sitc();
+
+      // 新建indexedDB数据库
+      const __dbname__ = "SitcDB";
+      const db = new Dexie(__dbname__);
+      db.version(1).stores({
+        centers: "++id, source.name",
+      });
+
+      const inp = document.getElementById("jsonInp");
+      const btn = document.getElementById("btn");
+
+      btn.addEventListener("click", () => {
+        if (
+          !inp.files.length ||
+          inp.files[0].name.split(".").at(-1) !== "json"
+        ) {
+          throw new Error("请选择json文件");
+        }
+
+        const file = inp.files[0];
+
+        // 读取json文件
+        const reader = new FileReader();
+
+        reader.readAsText(file);
+
+        // 失败回调
+        reader.onerror = () => {
+          console.log(`文件读取失败：${reader.error.name}`);
+        };
+
+        // 成功回调
+        reader.onload = () => {
+          const data = JSON.parse(reader.result);
+          console.log(data);
+
+          if (validateFullStructure(data)) {
+            // 添加数据
+            db.centers
+              .bulkAdd(data)
+              .then((info) => {
+                console.log("成功：", info);
+              })
+              .catch((err) => {
+                console.log("错误：", err);
+              });
+          } else {
+            throw new Error("上传的空间交互数据结构不正确");
+          }
+        };
+      });
+
+      ///******从indexedDB读取数据******///
+      const refresh = document.querySelector("#refresh");
+      const list = document.querySelector("#list");
+
+      refresh.addEventListener("click", async () => {
+        const count = await db.centers.count();
+        console.log("中心地点数量为：", count);
+        if (count === 0) {
+          alert("请先上传空间交互数据文件");
+          return;
+        }
+
+        // 根据省份存储中心地点
+        const places = {};
+        const allCenters = [];
+
+        db.centers
+          .each((center) => {
+            const source = center.source;
+            const p = source.province,
+              n = source.name;
+
+            allCenters.push(n);
+
+            if (Object.keys(places).includes(p)) {
+              places[p].push(n);
+            } else {
+              places[p] = [n];
+            }
+          })
+          .finally(() => {
+            console.log("finally");
+            // 渲染城市列表
+            let html = "";
+            allCenters.forEach((c, i) => {
+              html += `<li><label for="${i}"><input class="cityInp" type="checkbox" value="${c}" id="${i}" />${c}</label></li>`;
+            });
+
+            list.innerHTML = html;
+          });
+      });
+
+      //*****生成SITC*********//
+      const drawBtn = document.getElementById("draw");
+
+      drawBtn.addEventListener("click", () => {
+        // 获取选择的城市
+        const inps = document.getElementsByClassName("cityInp");
+        const cities = [];
+        for (let i = 0, inp; i < inps.length; ++i) {
+          inp = inps[i];
+          if (inp.checked) {
+            cities.push(inp.value);
+          }
+        }
+        console.log({ cities });
+
+        // 从indexDB中读取数据
+        db.centers
+          .where("source.name")
+          .anyOf(cities)
+          .toArray()
+          .then((res) => {
+            console.log(res);
+
+            // 绘制sitc
+            sitc.data(res).setMode("M").setDirection("outValue").layout();
+          })
+          .catch((err) => {
+            console.log(err);
+          });
+      });
+
+      ///********删除已传************////
+      const del = document.getElementById("del");
+      del.addEventListener("click", () => {
+        const confirmed = confirm("是否确定删除全部数据");
+        if (confirmed) {
+          db.centers.clear().finally(() => {
+            list.innerHTML = "";
+            alert("数据已全部删除");
+          });
+        }
+      });
+
+      // 验证空间交互数据结构是否正确
+      function validateFullStructure(data) {
+        return (
+          Array.isArray(data) &&
+          data.length !== 0 &&
+          data.every((item) => {
+            // 验证中心点
+            const validSource =
+              item.source &&
+              typeof item.source.name === "string" &&
+              Array.isArray(item.source.crd) &&
+              item.source.crd.length === 2 &&
+              typeof item.source.province === "string";
+
+            // 验证目标点
+            const validTargets =
+              Array.isArray(item.targets) &&
+              item.targets.every(
+                (target) =>
+                  typeof target.name === "string" &&
+                  Array.isArray(target.crd) &&
+                  target.crd.length === 2 &&
+                  typeof target.province === "string" &&
+                  typeof target.inValue === "number" &&
+                  typeof target.outValue === "number" &&
+                  typeof target.totalValue === "number"
+              );
+
+            return validSource && validTargets;
+          })
+        );
+      }
+    </script>
+  </body>
+</html>

@@ -14,3 +14,18 @@ body {
   height: 1000px;
   border: 1px solid gray;
 }
+
+/* indexedDBDemo.html */
+#svg-wrapper {
+  width: 1160px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+#list {
+  width: 150px;
+  height: 800px;
+  border: 1px skyblue solid;
+  overflow: auto;
+}
