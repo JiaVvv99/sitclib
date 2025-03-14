@@ -8,7 +8,8 @@ export default defineConfig({
   // 开发服务器配置（可选）
   server: {
     // open: "/test/es.html", // sitclib.es.js
-    open: "/test/umd.html", // sitclib.umd.js
+    // open: "/test/umd.html", // sitclib.umd.js
+    open: "/test/selectFile.html",
   },
 
   // 构建配置

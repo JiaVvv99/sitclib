@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Select Json File</title>
+    <link rel="stylesheet" href="./style.css" />
+  </head>
+  <body>
+    <svg id="sitc-svg"></svg>
+    <div>
+      <input type="file" accept=".json" id="jsonInp" />
+      <button id="btn">生成SITC</button>
+    </div>
+    <script type="module">
+      // import * as d3 from "d3";
+      import Sitc from "../sitc_algorithm";
+
+      const inp = document.getElementById("jsonInp");
+      const btn = document.getElementById("btn");
+
+      btn.addEventListener("click", () => {
+        if (
+          !inp.files.length ||
+          inp.files[0].name.split(".").at(-1) !== "json"
+        ) {
+          throw new Error("请选择json文件");
+        }
+
+        const file = inp.files[0];
+
+        // 读取json文件
+        const reader = new FileReader();
+
+        reader.readAsText(file);
+
+        // 失败回调
+        reader.onerror = () => {
+          console.log(`文件读取失败：${reader.error.name}`);
+        };
+
+        // 成功回调
+        reader.onload = () => {
+          const data = JSON.parse(reader.result);
+          console.log(data);
+
+          const sitc = new Sitc();
+          console.log(sitc);
+
+          sitc
+            .data(data.slice(0, 10))
+            .setMode("M")
+            .setDirection("inValue")
+            .setArrow({
+              stroke: {
+                color: "purple",
+                width: 2,
+              },
+            })
+            .layout();
+        };
+      });
+    </script>
+  </body>
+</html>
