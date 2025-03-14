@@ -51,6 +51,16 @@ class Base {
     }
     return this.svgSelection;
   }
+  // 验证空间交互数据结构是否正确
+  validateFullStructure(data) {
+    return Array.isArray(data) && data.every((item) => {
+      const validSource = item.source && typeof item.source.name === "string" && Array.isArray(item.source.crd) && item.source.crd.length === 2 && typeof item.source.province === "string";
+      const validTargets = Array.isArray(item.targets) && item.targets.every(
+        (target) => typeof target.name === "string" && Array.isArray(target.crd) && target.crd.length === 2 && typeof target.province === "string" && typeof target.inValue === "number" && typeof target.outValue === "number" && typeof target.totalValue === "number"
+      );
+      return validSource && validTargets;
+    });
+  }
 }
 function sortSingle1(data, direction) {
   const targets = data[0].targets;
@@ -884,7 +894,15 @@ class Sitc extends Base {
   constructor(sidata) {
     super();
     super.initializeSvg(this.svgSelector);
-    this.sidata = Array.isArray(sidata) ? sidata : null;
+    if (sidata) {
+      if (super.validateFullStructure(sidata)) {
+        this.sidata = sidata;
+      } else {
+        throw new Error("空间交互数据结构不正确");
+      }
+    } else {
+      this.sidata = null;
+    }
   }
   /**
    * 指定空间交互数据
@@ -892,8 +910,16 @@ class Sitc extends Base {
    * @returns sitcObj
    */
   data(_) {
-    Array.isArray(_) && (this.sidata = _);
-    return this;
+    if (_) {
+      if (super.validateFullStructure(_)) {
+        this.sidata = _;
+        return this;
+      } else {
+        throw new Error("空间交互数据结构不正确");
+      }
+    } else {
+      throw new Error("空间交互数据不能为空");
+    }
   }
   /**
    * 指定svg的css选择器
