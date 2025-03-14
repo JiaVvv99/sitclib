@@ -66,6 +66,7 @@ export default class Base {
   validateFullStructure(data) {
     return (
       Array.isArray(data) &&
+      data.length !== 0 &&
       data.every((item) => {
         // 验证中心点
         const validSource =
