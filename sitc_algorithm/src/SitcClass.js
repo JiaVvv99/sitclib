@@ -14,7 +14,16 @@ export default class Sitc extends Base {
     super.initializeSvg(this.svgSelector);
 
     // 初始化空间交互数据
-    this.sidata = Array.isArray(sidata) ? sidata : null;
+    if (sidata) {
+      if (super.validateFullStructure(sidata)) {
+        this.sidata = sidata;
+      } else {
+        throw new Error("空间交互数据结构不正确");
+      }
+    } else {
+      this.sidata = null;
+    }
+    // this.sidata = Array.isArray(sidata) ? sidata : null;
   }
   /**
    * 指定空间交互数据
@@ -22,8 +31,18 @@ export default class Sitc extends Base {
    * @returns sitcObj
    */
   data(_) {
-    Array.isArray(_) && (this.sidata = _);
-    return this;
+    if (_) {
+      if (super.validateFullStructure(_)) {
+        this.sidata = _;
+        return this;
+      } else {
+        throw new Error("空间交互数据结构不正确");
+      }
+    } else {
+      throw new Error("空间交互数据不能为空");
+    }
+    // Array.isArray(_) && (this.sidata = _);
+    // return this;
   }
 
   /**

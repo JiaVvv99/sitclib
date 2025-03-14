@@ -61,4 +61,36 @@ export default class Base {
 
     return this.svgSelection;
   }
+
+  // 验证空间交互数据结构是否正确
+  validateFullStructure(data) {
+    return (
+      Array.isArray(data) &&
+      data.every((item) => {
+        // 验证中心点
+        const validSource =
+          item.source &&
+          typeof item.source.name === "string" &&
+          Array.isArray(item.source.crd) &&
+          item.source.crd.length === 2 &&
+          typeof item.source.province === "string";
+
+        // 验证目标点
+        const validTargets =
+          Array.isArray(item.targets) &&
+          item.targets.every(
+            (target) =>
+              typeof target.name === "string" &&
+              Array.isArray(target.crd) &&
+              target.crd.length === 2 &&
+              typeof target.province === "string" &&
+              typeof target.inValue === "number" &&
+              typeof target.outValue === "number" &&
+              typeof target.totalValue === "number"
+          );
+
+        return validSource && validTargets;
+      })
+    );
+  }
 }
